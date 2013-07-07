@@ -1,9 +1,13 @@
+#Trout, written by John Fish. 
+
 import os
 
-header = "<!DOCTYPE HTML>\n<html>\n    <head>\n        <link rel='stylesheet' type='text/css' href='style.css'>\n        <title>TEST</title>\n    </head>\n<body>\n"
-footer = "\n</body>\n</html>"
+fileName = input("What is the file name?")
+
+header = open('header', 'r+')
+footer = open('footer', 'r+')
 
 testfile = open('articles/testfile', 'r+')
 testhtml = open('htmlArticles/testfile.html', 'w')
-testhtml.write(header+'<p>This worked dandily!</p>'+footer)
-print(testfile.read())
+testhtml.write(header.read()+'<p>This worked dandily!</p>'+footer.read())
+print(testfile.readline())
