@@ -1,4 +1,10 @@
 </title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
+</head>
 <body>
+<nav>
+    <a href="articles.html" class="navLink">a</a>
+    <a href="about.html" class="navLink">&Uuml;</a>
+    <a href="#" class="home">johnafish</a>
+</nav>
+<section id="main">
+    <article>
