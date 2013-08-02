@@ -20,11 +20,11 @@ def writeFile(fileName):
 def resetAll():
     articleList = open('input/articles', 'w')
     writeHeaderToArticlePage()
-    os.chdir("rawarticles")
+    os.chdir("input/rawarticles")
     for files in os.listdir("."):
         writeFile(files)
         writeFilesToArticlePage(files)
-        os.chdir("rawarticles")
+        os.chdir("input/rawarticles")
     writeFooterToArticlePage()
 
 def writeHeaderToArticlePage():
