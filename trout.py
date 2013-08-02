@@ -8,22 +8,43 @@ args = parser.parse_args()
 curPath = os.getcwd()
 
 def writeFile(fileName):
-    article = open(curPath+'/rawarticles/'+fileName, 'r+')
-    articleHTML = open(curPath+'/writing/'+fileName+'.html', 'w')
+    article = open(curPath+'/input/rawarticles/'+fileName, 'r+')
+    articleHTML = open(curPath+'/output/writing/'+fileName+'.html', 'w')
     os.chdir(curPath)
-    headerOne = open('headerOne', 'r+')
-    headerTwo = open('headerTwo', 'r+')
-    footer = open('footer', 'r+')
-    articleList = open('articles', 'a')
+    headerOne = open('input/headerOne', 'r+')
+    headerTwo = open('input/headerTwo', 'r+')
+    footer = open('input/footer', 'r+')
     articleHTML.write(headerOne.read()+article.readline()+headerTwo.read()+article.read()+footer.read())
         
 
 def resetAll():
-    os.chdir("rawarticles")
+    articleList = open('input/articles', 'w')
+    writeHeaderToArticlePage()
+    os.chdir("input/rawarticles")
     for files in os.listdir("."):
         writeFile(files)
-        os.chdir("rawarticles")
+        writeFilesToArticlePage(files)
+        os.chdir("input/rawarticles")
+    writeFooterToArticlePage()
 
+def writeHeaderToArticlePage():
+    articlePage = open('output/writing/index.html', 'w')
+    headerArticles = open('input/headerArticles', 'r+')
+    articlePage.write(headerArticles.read())
+
+def writeFilesToArticlePage(fileName):
+    os.chdir(curPath)
+    articlePage = open('output/writing/index.html', 'a')
+    article = open('input/rawarticles/'+fileName, 'r+')
+    articlePage.write('<li><a href="'+fileName+'.html'+'">'+article.readline()+'</a></li>')
+    
+def writeFooterToArticlePage():
+    os.chdir(curPath)
+    articlePage = open('output/writing/index.html', 'a')
+    footerArticles = open('input/footerArticles', 'r+')
+    articlePage.write(footerArticles.read())
+    
+    
 if args.w[0].lower() == "f":
     if args.n == None:
         fileName = input("What is the file name?")
