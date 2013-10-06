@@ -1,5 +1,5 @@
 #Trout, written by John Fish in July 2013.
-import os, argparse
+import os, argparse, linecache, sys
 #Import headers and footer. Each are seperate text files containing within them the code for the half of the code before and after their respective sides of the article. articleList is the list of written articles (simple enough!)
 parser = argparse.ArgumentParser(description="Create a static set of webpages from text files.")
 parser.add_argument('-w', nargs=1)
@@ -14,7 +14,9 @@ def writeFile(fileName):
     headerOne = open('input/headerOne', 'r+')
     headerTwo = open('input/headerTwo', 'r+')
     footer = open('input/footer', 'r+')
-    articleHTML.write(headerOne.read()+article.readline()+headerTwo.read()+article.read()+footer.read())
+    title = article.readline()
+    placeholder = article.readline() #this is sloppy and dumb but it seems to work
+    articleHTML.write(headerOne.read()+title+headerTwo.read()+article.read()+footer.read())
         
 
 def resetAll():
@@ -36,7 +38,7 @@ def writeFilesToArticlePage(fileName):
     os.chdir(curPath)
     articlePage = open('output/writing/index.html', 'a')
     article = open('input/rawarticles/'+fileName, 'r+')
-    articlePage.write('<li><a href="'+fileName+'.html'+'">'+article.readline()+'</a></li>')
+    articlePage.write('<li><a href="'+fileName+'.html'+'">'+article.readline()+'</a><br /><span>'+article.readline()+'</span><br /><br /></li>')
     
 def writeFooterToArticlePage():
     os.chdir(curPath)
